@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Excel Data</title>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/5.0.0/css/bootstrap.min.css">
+</head>
+<body>
+	    <div th:replace="~{layout/header :: header}"></div>
+	<div class="container mt-4">
+		<h1 class="text-center">Excel Data</h1>
+		<button type = "button"><a href = "/excel/input">액셀 import</a></button>
+		<!-- 검색 폼 -->
+		<form th:action="@{/excel}" method="get" class="mb-3">
+			<div class="row">
+				<div class="col-md-3">
+					<input type="text" class="form-control" name="foodCd"
+						placeholder="Food Code">
+				</div>
+				<div class="col-md-3">
+					<input type="text" class="form-control" name="foodName"
+						placeholder="Food Name">
+				</div>
+				<div class="col-md-3">
+					<input type="text" class="form-control" name="researchYear"
+						placeholder="Research Year">
+				</div>
+				<div class="col-md-3">
+					<input type="text" class="form-control" name="makerName"
+						placeholder="Maker Name">
+				</div>
+				<div class="col-md-3">
+					<button type="submit" class="btn btn-primary mt-2">Search</button>
+				</div>
+			</div>
+
+		</form>
+
+		<!-- 검색 결과 표 -->
+		<div class="row">
+			<div class="col-lg-12">
+				<table class="table table-striped table-bordered">
+					<thead class="thead-dark">
+						<tr>
+							<!-- 표의 헤더 열을 유지 -->
+							<th>ID</th>
+							<th>Food Code</th>
+							<th>Group Name</th>
+							<th>Food Name</th>
+							<th>Research Year</th>
+							<th>Maker Name</th>
+							<th>Serving Size</th>
+							<th>Calorie (kcal)</th>
+							<th>Carbohydrate</th>
+							<th>Protein</th>
+							<th>Province</th>
+							<th>Sugars</th>
+							<th>Salt</th>
+							<th>Cholesterol</th>
+							<th>Saturated Fatty Acids</th>
+							<th>Trans Fat</th>
+							<th>Reference Name</th>
+						</tr>
+					</thead>
+					<tbody th:each = "row : ${excelData}">
+
+						<tr>
+							<td th:text="${row.id}"></td>
+							<td th:text="${row.foodCd}"></td>
+							<td th:text="${row.groupName}"></td>
+							<td th:text="${row.foodName}"></td>
+							<td th:text="${row.researchYear}"></td>
+							<td th:text="${row.makerName}"></td>
+							<td th:text="${row.servingSize}"></td>
+							<td th:text="${row.calorie}"></td>
+							<td th:text="${row.carbohydrate}"></td>
+							<td th:text="${row.protein}"></td>
+							<td th:text="${row.province}"></td>
+							<td th:text="${row.sugars}"></td>
+							<td th:text="${row.salt}"></td>
+							<td th:text="${row.cholesterol}"></td>
+							<td th:text="${row.saturatedFattyAcides}"></td>
+							<td th:text="${row.transFat}"></td>
+							<td th:text="${row.refName}"></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="/webjars/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+	<div th:replace="~{layout/footer :: footer}"></div>
+</body>
+</html>

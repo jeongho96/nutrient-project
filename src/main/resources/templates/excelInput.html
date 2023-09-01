@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function fn_xlsXlsxChk(fileName) {
+	 
+    // 문자열.split() 메소드는 문자열을 파라미터에 적은 문자로 구분하여 배열로 저장한다.
+    var tmp = fileName.split(".");
+    var extensionType = tmp[1];
+        
+    // extensionType에 담은 확장자가 'xls' 또는 'xlsx'이면 true를 리턴. 아닐 경우 false를 리턴.
+    if( extensionType == "xls" ){
+        return true;
+    } else if( extensionType == "xlsx" ){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+
+function regularExpression( fileName ) {
+        
+    // -, _, ., 숫자, 알파벳 소문자가 아니면 체크
+    var checkRegExp = /^[-_.0-9a-z]*$/;
+        
+    // 2. 허용된 범위의 문자만 사용했다면 true를 리턴. 그 외의 문자를 사용했다면 false를 리턴.
+    if ( !checkRegExp.test( fileName ) ) return false;
+    else return true;
+}
+
+
+function fn_chkNSubmit() {
+ 
+    // input type="file"의 파일명은 .files[0].name 메소드를 사용
+    var fileName = document.getElementById("inputExcelFile").files[0].name;
+ 
+    // 파일명 체크 스크립트
+    if ( !regularExpression( fileName ) ) {
+        alert("파일명을 확인!");
+        return false;
+    }
+ 
+    // 확장자 체크 스크립트
+    if ( !fn_xlsXslxChk( fileName ) ) {
+        alert("엑셀파일만 업로드 가능!");
+        return false;
+    }
+ 
+    document.getElementById("frm").submit();
+}
+
+
+
+
+
+
+</script>
+</head>
+<body>
+	<div style="border: 1px solid #222;">
+        <form id="frm" method="POST" enctype="multipart/form-data" action="/excel/input">
+            <div style="padding: 10px;">
+                <div>
+                    <input type="file" id="inputExcelFile" name="justFileName" />
+                    <input type="submit" value="제출"/>
+                    <button type="button" id="uploadBtn">전송</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <a href = "/excel">이전으로</a>
+    
+    <script>
+    	document.getElementById("uploadBtn").addEventListener('click', fn_chkNSubmit);
+    </script>
+</body>
+</html>
